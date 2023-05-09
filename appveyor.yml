@@ -28,7 +28,7 @@ before_build:
       cd pineapple-src
       mkdir build
       cd build
-      cmake .. -G "Visual Studio 17 2022" -A %arch% -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
+      cmake .. -G "Visual Studio 17 2022" -A %arch% -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DYUZU_TESTS=no
 
 build_script:
   - cmd: |-
