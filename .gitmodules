@@ -1,0 +1,3 @@
+[submodule "pineapple-src"]
+	path = pineapple-src
+	url = https://github.com/pineappleEA/pineapple-src.git
