@@ -19,25 +19,25 @@ install:
 
 cache:
   - VulkanSDK-Installer.exe
-  - pineapple-src\build\vcpkg_installed
+  - yuzu\build\vcpkg_installed
   - c:\tools\vcpkg\installed\
 
 before_build:
   - git submodule update --init --recursive
   - cmd: |-
-      cd pineapple-src
+      cd yuzu
       mkdir build
       cd build
       cmake .. -G "Visual Studio 17 2022" -A %arch% -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DYUZU_TESTS=no
 
 build_script:
   - cmd: |-
-      cd pineapple-src/build
+      cd yuzu/build
       cmake --build . --config Release
 
 after_build:
-  - 7z a Release.zip pineapple-src/build/bin/Release
+  - 7z a Release.zip yuzu/build/bin/Release
 
 artifacts:
-  - path: pineapple-src/build/bin/Release.zip
+  - path: yuzu/build/bin/Release.zip
     name: Release
