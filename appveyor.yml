@@ -9,8 +9,9 @@ environment:
 
 install:
   - appveyor DownloadFile https://sdk.lunarg.com/sdk/download/1.3.246.0/windows/VulkanSDK-1.3.246.0-Installer.exe -FileName VulkanSDK-Installer.exe
-  - VulkanSDK-Installer.exe /S
+  - VulkanSDK-Installer.exe --accept-licenses --default-answer --confirm-command install
   - set VULKAN_SDK=C:\VulkanSDK\1.3.246.0
+  - set VK_SDK_PATH=C:\VulkanSDK\1.3.246.0
 
 cache:
   - VulkanSDK-Installer.exe
