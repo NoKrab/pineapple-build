@@ -1,0 +1,37 @@
+image: Visual Studio 2022
+
+configuration:
+  - Release
+
+environment:
+  matrix:
+    - arch: x64
+
+install:
+  - appveyor DownloadFile https://sdk.lunarg.com/sdk/download/1.3.246.0/windows/VulkanSDK-1.3.246.0-Installer.exe -FileName VulkanSDK-Installer.exe
+  - VulkanSDK-Installer.exe /S
+  - set VULKAN_SDK=C:\VulkanSDK\1.3.246.0
+
+cache:
+  - VulkanSDK-Installer.exe
+  - pineapple-src\build\vcpkg_installed
+
+before_build:
+  - git submodule update --init --recursive
+  - cmd: |-
+      cd pineapple-src
+      mkdir build
+      cd build
+      cmake .. -G "Visual Studio 17 2022" -A x64
+
+build_script:
+  - cmd: |-
+      cd pineapple-src/build
+      cmake --build . --config Release
+
+after_build:
+  - 7z a Release.zip pineapple-src/build/bin/Release
+
+artifacts:
+  - path: pineapple-src/build/bin/Release.zip
+    name: Release
